@@ -48,13 +48,9 @@ gl2_positions,
 gl2_maxDraws = 40000, // Max amount of images on the screen at the same time. You can set this to any number, it's just the array size.
 gl2_draws = 0, // Internal count of images drawn so far this frame.
 
-// destX/destY is a pixel position on the screen where 0,0 is top left of the screen, and the top left of the image.
-// destWidth/destHeight is the size in pixels you want to draw at. If you don't want to scale, it should be the same as sourceWidth/sourceHeight.
+// Draw the defined rectangular area of the sprite-sheet to the screen at the given coordinates with the given scale, alpha blend, and rotation.
 // rgba (optional). You can tint the image for example to green by passing 0x00FF007F. rgba alpha goes from 0 to 127 (0x7F) where 127 is not transparent at all. Higher than 127 will brighten the image more than normal.
 // rotation is (optional). In radians. Negative is allowed. Rotated about its center.
-/**
-*/
-// Draw the defined rectangular area of the sprite-sheet to the screen at the given coordinates with the given scale, alpha blend, and rotation.
 gl2_drawImage = (sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight, rgba, rotation) => {
 	let 
   positions = gl2_positions, // Use a local variable so it's faster to access.
