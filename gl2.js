@@ -83,7 +83,7 @@ gl2_drawImage = (sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, dest
 },
 
 // A handy function for when you want to draw rectangles. For example debugging hitboxes, or to darken everything with semi-transparent black overlay. This assumes the top left pixel in your texture is white, so you can stretch/tint it to any size/color rectangle.
-gl2_drawRect = (destX, destY, destWidth, destHeight, rgba, rotation) => gl2_drawImage(0, 0, 1, 1, destX, destY, destWidth, destHeight, rgba, rotation),
+gl2_drawRect = (x, y, width, height, rgba, rotation) => gl2_drawImage(0, 0, 1, 1, x, y, width, height, rgba, rotation),
 
 // Call this every frame to actually draw everything onto your canvas. Renders all drawImage calls since the last time you called drawEverything.
 gl2_drawEverything = () => {

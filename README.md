@@ -71,6 +71,24 @@ Queues a portion of the currently loaded texture (a sub-image) to be drawn when 
 
 <br>
 
+### gl2_drawRect(x, y, width, height, rgba, rotation)
+
+A handy function for when you want to draw rectangles. For example debugging hitboxes, or to darken everything with semi-transparent black overlay. This assumes the top left pixel in your texture is white, so you can stretch/tint it to any size/color rectangle.
+
+**x** - X coordinate for the rectangle.
+
+**y** - Y coordinate for the rectangle.
+
+**width** - Width of rectangle.
+
+**height** - Height of rectangle.
+
+**rgba** - RGBA tint (optional).
+
+**rotation** - Rotation in radians (optional).
+
+<br>
+
 ### gl2_drawEverything()
 
 Draws all queued sub-images to the canvas. Call this every frame.
