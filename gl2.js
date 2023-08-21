@@ -102,7 +102,7 @@ gl2_resize = () => {
 // Set the gl canvas background color with the given RGBA values.
 gl2_setBackgroundColor = (r,g,b,a) => gl2_gl.clearColor(r,g,b,a),
 
-gl2_setup = (canvas, texFileName) => {
+gl2_setup = (canvas, imageName) => {
 
   gl2_canvas = canvas;
 	gl2_gl = canvas.getContext('webgl', { antialias: false, alpha: false, preserveDrawingBuffer: true }); // Get the canvas/context from html.
@@ -282,10 +282,10 @@ gl_FragColor = texture2D(p, g) * h;
 	setupAttribute("f", gl2_gl.FLOAT, floatsPerImageRotation); // Then read the next 4 bytes as 1 float and store it in my float "f"
 	
 	// Load the texture image.
-	if(texFileName) {
+	if(imageName) {
 		gl2_jsImage = new Image();
 		gl2_jsImage.onload = () => gl2_loadTextureFromImage(gl2_jsImage);
-		gl2_jsImage.src = texFileName;
+		gl2_jsImage.src = imageName;
 	}
 },
 

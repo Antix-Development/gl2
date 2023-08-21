@@ -1,11 +1,95 @@
-gl2.js - A modified version of [gl1.js](https://github.com/curtastic/gl1), by Curtis "curtastic" Robinson.
+# gl2.js
+A modified version of [gl1.js](https://github.com/curtastic/gl1) by Curtis "curtastic" Robinson.
 
 The differences between gl2.js and gl1.js are...
-- Readability: Readability has been somewhat destroyed.
-- UnObjectified: Code has been flattened to be just a bunch of functions you call directly.
-- Code size: When fully minified gl2.js about 1.5kb smaller than gl1.js.
+
+- Readability has been somewhat destroyed.
+
+- Code has been flattened to be just a bunch of functions you call directly.
+
+- When fully minified gl2.js about 1.5kb smaller than gl1.js.
+
+<br>
+
+## Functions
+
+<br>
+
+### gl2_setup(canvas, imageName)
+
+Initialize the engine.
+
+**canvas** - an HTML canvas element
+
+**imageName** - name of image to load (optional)
+
+<br>
+
+### gl2_setBackgroundColor(r, g, b, a)
+
+set the canvas background color.
+
+**r** - Red
+
+**g** - Green
+
+**b** - Blue
+
+**a** - Alpha
+
+<br>
+
+### gl2_resize()
+
+Resize viewport and shaders. Call whenever your canvas size changes.
+
+<br>
+
+### gl2_drawImage(sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight, rgba, rotation)
+
+Queues a portion of the currently loaded texture (a sub-image) to be drawn when `gl2_drawEverything` is called
+
+**sourceX** - Sub-image x coordinate in sprite-sheet to draw from.
+
+**sourceY** - Sub-image y coordinate in sprite-sheet to draw from.
+
+**sourceWidth** - Width of sub-image image
+
+**sourceHeight** - Height of sub-image
+
+**destX** - X destination on screen for sub-image.
+
+**destY** - Y destination on screen for sub-image.
+
+**destWidth** - Destination width for sub-image.
+
+**destHeight** - Destination height for sub-image.
+
+**rgba** - RGBA tint (optional).
+
+**rotation** - Rotation in radians (optional).
+
+<br>
+
+### gl2_drawEverything()
+
+Draws all queued sub-images to the canvas. Call this every frame.
+
+<br>
+
+### gl2_loadTextureFromImage(image)
+
+Prepare the given image for use.
+
+**image** - an HTML IMG or CANVAS element.
+
+<br>
 
 <hr>
+
+<br>
+
+## Original gl1.js readme
 
 gl1.js
 
