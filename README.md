@@ -1,3 +1,12 @@
+gl2.js - A modified version of gl1.js (https://github.com/curtastic/gl1), by Curtis "curtastic" Robinson.
+
+The differences between gl2.js and gl1.js are...
+- Readability: Readability has been somewhat destroyed.
+- UnObjectified: Code has been flattened to be just a bunch of functions you call directly.
+- Code size: When fully minified gl2.js about 1.5kb smaller than gl1.js.
+
+<hr>
+
 gl1.js
 
 A webGL 2D graphics library.
