@@ -19,9 +19,9 @@ The differences between gl2.js and gl1.js are...
 
 Initialize the engine.
 
-**canvas** - an HTML canvas element
+**canvas** - an HTML canvas element.
 
-**imageName** - name of image to load (optional)
+**imageName** - name of image to load (optional).
 
 <br>
 
@@ -29,13 +29,13 @@ Initialize the engine.
 
 set the canvas background color.
 
-**r** - Red
+**r** - Red.
 
-**g** - Green
+**g** - Green.
 
-**b** - Blue
+**b** - Blue.
 
-**a** - Alpha
+**a** - Alpha.
 
 <br>
 
@@ -47,11 +47,11 @@ Resize viewport and shaders. Call whenever your canvas size changes.
 
 ### gl2_drawImage(sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight, rgba, rotation)
 
-Queues a portion of the currently loaded texture (a sub-image) to be drawn when `gl2_drawEverything` is called
+Queues a portion of the currently loaded texture (a sub-image) to be drawn when `gl2_drawEverything` is called.
 
-**sourceX** - Sub-image x coordinate in sprite-sheet to draw from.
+**sourceX** - Sub-image x coordinate (in texture) to draw from.
 
-**sourceY** - Sub-image y coordinate in sprite-sheet to draw from.
+**sourceY** - Sub-image y coordinate (in texture) to draw from.
 
 **sourceWidth** - Width of sub-image image
 
