@@ -1,55 +1,57 @@
 <html>
-	<body style='margin:0'>
-		<canvas id=gameCanvas></canvas>
+	<body style="margin:0">
+
+		<canvas id=C></canvas>
 		
-		<script src='gl2.js'>
-		</script>
+		<script src='gl2.js'></script>
 		
 		<script>
-			// Make the game fill the whole screen, even after the screen resizes.
-			window.onresize = function()
-			{
-				gameCanvas.style.width = window.innerWidth+'px'
-				gameCanvas.style.height = window.innerHeight+'px'
-				gameCanvas.setAttribute('width', window.innerWidth)
-				gameCanvas.setAttribute('height', window.innerHeight)
-				gl2_resize()
+
+      // Window resize event handler. Make the game fill the whole screen
+			onresize = () => {
+        let 
+        width =  innerWidth,
+				height =  innerHeight;
+
+				C.style.width = width + 'px';
+				C.style.height = height + 'px';
+				
+        C.setAttribute('width', width);
+				C.setAttribute('height', height);
+
+				gl2_resize();
 			}
 			
-			window.onload = function()
-			{
-				gl2_setup(gameCanvas, "tiles.png")
-
+      // Window onload event handler (fired when page fully loaded). Initialize engine and start gameloop
+			onload = () => {
+				gl2_setup(C, "tiles.png");
         gl2_setBackgroundColor(.5, .7, 1, 1);
-
-        window.onresize()
-				gameLoop()
+        onresize(); // Force resize event
+				gameLoop();
 			}
-
 			
-			var playerX = 0
-			var playerY = 11
-			function gameLoop()
-			{
-				window.requestAnimationFrame(gameLoop)
+			var 
+      playerX = 0,
+			playerY = 16,
+
+      // Game loop, called every frame
+			gameLoop = () => {
+				window.requestAnimationFrame(gameLoop);
 				
-				playerX++
+				playerX ++;
 				
-				// 64,0 is where the player is inside tiles.png.
-				gl2_drawImage(64,0, 32,32, playerX,playerY, 32,32)
+				gl2_drawImage(64,0, 32,32, playerX,playerY, 32,32) // 64,0 is where the player is inside tiles.png.
 				
-				// This wall is stretched taller (88) when it's actually a 32x32 image.
-				gl2_drawImage(32,0, 32,32, 44,44, 32,88, undefined, playerX/15)
+				gl2_drawImage(32,0, 32,32, 44,44, 32,88, undefined, playerX / 15); // This wall is stretched taller (88) when it's actually a 32x32 image. It also rotates about its center
 				
-				// Alpha going over 128 makes it even brighter than normal.
-				var alpha = Math.floor((Math.sin(playerX / 15) + 1) / 2 * 255)
+				var alpha = Math.floor((Math.sin(playerX / 15) + 1) / 2 * 255); // Alpha going over 128 makes it even brighter than normal.
 				gl2_drawImage(32,0, 32,32, 44,44, 64,64, 0xFFFFFF00 + alpha)
 				
-				// Draw another wall without any green.
-				gl2_drawImage(32,0, 32,32, 111,111, 32,32, 0xFF00FF7F)
-				
-				gl2_drawEverything()
-			}
+				gl2_drawImage(32,0, 32,32, 111,111, 32,32, 0xFF00FF7F); // Draw another wall without any green.
+        
+        gl2_drawEverything();
+			};
+
 		</script>
 	</body>
 </html>
