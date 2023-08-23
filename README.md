@@ -11,6 +11,26 @@ The differences between gl2.js and gl1.js are...
 
 <br>
 
+## What's new
+
+<br>
+
+#### 23.8.2023
+
+- `gl2_loadTextureFromImage` renamed to `gl2_loadTexture` because it accepts images and canvasses, not just images as the previous name would suggest.
+
+- Fixed issue where `gl2_loadTexture` was not using the given image or canvas.
+
+<br>
+
+## How To Use
+
+<br>
+
+Checkout the examples included in this repository, it's not rocket science.
+
+<br>
+
 ## Functions
 
 <br>
@@ -95,11 +115,11 @@ Draws all queued sub-images to the canvas. Call this every frame.
 
 <br>
 
-### gl2_loadTextureFromImage(image)
+### gl2_loadTexture(texture)
 
-Prepare the given image for use.
+Prepare the given texture for use.
 
-**image** - an HTML IMG or CANVAS element.
+**texture** - an HTML IMG or CANVAS element.
 
 <br>
 

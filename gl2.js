@@ -112,98 +112,6 @@ gl2_setup = (canvas, imageName) => {
   vertShader=createShader(gl2_gl.VERTEX_SHADER,`${ATTRIBUTE} vec2 a;${ATTRIBUTE} vec2 b;${ATTRIBUTE} vec2 c;${ATTRIBUTE} vec4 d;${ATTRIBUTE} vec4 e;${ATTRIBUTE} float f;${VARYING} highp vec2 g;${VARYING} vec4 h;${UNIFORM} vec2 i;${UNIFORM} vec2 j;void main(void){vec2 k;if(f!=0.0){float l=cos(f);float m=sin(f);vec2 n=c*(a-0.5);k=(b+vec2(l*n.x-m*n.y,m*n.x+l*n.y)+c/2.0)/i;}else{k=(b+c*a)/i;}gl_Position=vec4(k.x-1.0,1.0-k.y,0.0,1.0);g=(d.xy+d.zw*a)/j;if(e.x>127.0){float o=pow(2.0,(e.x-127.0)/16.0)/255.0;h=vec4(e.w*o,e.z*o,e.y*o,1.0);}else h=vec4(e.w/255.0,e.z/255.0,e.y/255.0,e.x/127.0);}`), // Each time we draw an image it will run this 6 times. Once for each point of the 2 triangles we use to make the image's rectangle area. The only thing that changes on each repeated draw for the same image is a, so we can get to each corner of the image's rectangle area.
   fragShader = createShader(gl2_gl.FRAGMENT_SHADER, `${VARYING} highp vec2 g;${VARYING} highp vec4 h;${UNIFORM} sampler2D p;void main(void){gl_FragColor=texture2D(p,g)*h;}`),
 
-  /*
-  var vertShader = createShader(gl2_gl.VERTEX_SHADER, `
-    attribute vec2 a;
-    attribute vec2 b;
-    attribute vec2 c;
-    attribute vec4 d;
-    attribute vec4 e;
-    attribute float f;
-    varying highp vec2 g;
-    varying vec4 h;
-    uniform vec2 i;
-    uniform vec2 j;
-    void main(void){
-    vec2 k;
-    if(f != 0.0){
-    float l = cos(f);
-    float m = sin(f);
-    vec2 n = c * (a - 0.5);
-    k = (b + vec2(l * n.x - m * n.y, m * n.x + l * n.y) + c/2.0) / i;
-    } else {
-    k = (b + c*a) / i;
-    }
-    gl_Position = vec4(k.x - 1.0, 1.0 - k.y, 0.0, 1.0);
-    g = (d.xy + d.zw * a) / j;
-    if(e.x > 127.0) {
-    float o = pow(2.0, (e.x-127.0)/16.0) / 255.0;
-    h = vec4(e.w * o, e.z * o, e.y * o, 1.0);
-    } else
-    h = vec4(e.w / 255.0, e.z / 255.0, e.y / 255.0, e.x / 127.0);
-    }`
-  );
-
-  var fragShader = createShader(gl2_gl.FRAGMENT_SHADER, `
-varying highp vec2 g;
-varying highp vec4 h;
-uniform sampler2D p;
-void main(void){
-gl_FragColor = texture2D(p, g) * h;
-}
-`);
-
-	var vertCode = `
-		attribute vec2 a;
-		attribute vec2 b;
-		attribute vec2 c;
-		attribute vec4 d;
-		attribute vec4 e;
-		attribute float f;
-		varying highp vec2 g;
-		varying vec4 h;
-		uniform vec2 i;
-		uniform vec2 j;
-		void main(void){
-			vec2 k;
-			if(f != 0.0){
-				float l = cos(f);
-				float m = sin(f);
-				vec2 n = c * (a-0.5);
-				k = (b + vec2(l*n.x - m*n.y, m*n.x + l*n.y) + c/2.0) / i;
-			} else {
-				k = (b + c*a) / i;
-			}
-			gl_Position = vec4(k.x - 1.0, 1.0 - k.y, 0.0, 1.0);
-			g = (d.xy + d.zw * a) / j;
-			if(e.x > 127.0) {
-				float o = pow(2.0, (e.x-127.0)/16.0) / 255.0;
-				h = vec4(e.w*o, e.z*o, e.y*o, 1.0);
-			} else
-				h = vec4(e.w/255.0, e.z/255.0, e.y/255.0, e.x/127.0);
-		}
-	`;
-	Create a vertex shader object with code.
-	var vertShader = gl2_gl.createShader(gl2_gl.VERTEX_SHADER);
-	gl2_gl.shaderSource(vertShader, vertCode);
-	gl2_gl.compileShader(vertShader);
-
-	Fragment shader source code.
-	var fragCode = `
-		varying highp vec2 g;
-		varying highp vec4 h;
-		uniform sampler2D p;
-		
-		void main(void){
-			gl_FragColor = texture2D(p, g) * h;
-		}
-	`;
-  Create fragment shader object with code.
-	var fragShader = gl2_gl.createShader(gl2_gl.FRAGMENT_SHADER);
-	gl2_gl.shaderSource(fragShader, fragCode);
-	gl2_gl.compileShader(fragShader);
-*/
-
 	// Create a shader program object and attach the shaders.
 	shaderProgram = gl2_gl.createProgram();
 	gl2_gl.attachShader(shaderProgram, vertShader);
@@ -249,7 +157,7 @@ gl_FragColor = texture2D(p, g) * h;
 	// Load the texture image.
 	if(imageName) {
 		gl2_jsImage = new Image();
-		gl2_jsImage.onload = () => gl2_loadTextureFromImage(gl2_jsImage);
+		gl2_jsImage.onload = () => gl2_loadTexture(gl2_jsImage);
 		gl2_jsImage.src = imageName;
 	}
 },
@@ -258,10 +166,10 @@ gl_FragColor = texture2D(p, g) * h;
 gl2_setTexParameter = (name) => gl2_gl.texParameteri(gl2_gl.TEXTURE_2D, name, gl2_gl.NEAREST),
 
 // This is a separate function so that you can call it again mid-game to change the artwork if you load a new image or canvas.
-gl2_loadTextureFromImage = (image) => {
+gl2_loadTexture = (image) => {
 	// Create a gl texture from image file.
 	gl2_gl.bindTexture(gl2_gl.TEXTURE_2D, gl2_gl.createTexture());
-	gl2_gl.texImage2D(gl2_gl.TEXTURE_2D, 0, gl2_gl.RGBA, gl2_gl.RGBA, gl2_gl.UNSIGNED_BYTE, gl2_jsImage);
+	gl2_gl.texImage2D(gl2_gl.TEXTURE_2D, 0, gl2_gl.RGBA, gl2_gl.RGBA, gl2_gl.UNSIGNED_BYTE, image);
 	gl2_gl.generateMipmap(gl2_gl.TEXTURE_2D);
 	gl2_gl.activeTexture(gl2_gl.TEXTURE0);
 	
